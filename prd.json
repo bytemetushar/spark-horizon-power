@@ -1,0 +1,408 @@
+{
+  "project_metadata": {
+    "project_name": "demelo-jewels-pro",
+    "project_category": "E-commerce / Luxury Retail",
+    "description": "A web experience for Demelo Jewels: full-responsive, visually luxurious website for product exploration, premium brand impact, and simulated checkout — all with stunning dark UI and gold accents.",
+    "core_purpose": "Showcase and sell luxury jewelry collections online with an ultra-premium, elegant browsing and checkout experience.",
+    "target_audience": "Affluent jewelry shoppers and brand admirers seeking an elegant, high-end online showroom experience",
+    "key_features": [
+      "Hero section with luxury brand and tagline",
+      "Jewelry categories grid (filter products)",
+      "Stagger-animated featured collection grid/cards",
+      "Product detail modal with add-to-cart",
+      "Cart sidebar/drawer with summary, editable quantities, and order flow",
+      "Checkout section for simulated purchases",
+      "Ultra-premium, gold-accented design with elegant animations"
+    ]
+  },
+  "frontend": {
+    "pages": [
+      {
+        "page_name": "Home",
+        "route": "/",
+        "show_in_nav": true,
+        "nav_order": 1,
+        "purpose": "Landing, browsing, buying, and order simulation for Demelo Jewels.",
+        "description": "Ultra-premium single landing page with layered dark-gold visual hierarchy: sticky luxury header, cinematic hero, animated categories grid, featured product grid with card-hover effects, detail modal, cart-drawer with checkout, and elegant footer. Uses elegant serif and luxury sans-serif fonts, with gold shimmer highlights, deep blacks, and glass surfaces. All transitions and overlays feature smooth motion (slide, fade, glow). Responsive down to mobile. Cart and modals prevent background scroll when open.",
+        "sections": [
+          "Header",
+          "HeroSection",
+          "JewelryCategoriesGrid",
+          "FeaturedCollectionGrid",
+          "ProductDescriptionModal",
+          "CartDrawer",
+          "CheckoutSection",
+          "Footer"
+        ],
+        "content_notes": "All primary flows (browse, filter, view details, add to cart, checkout) occur on this single landing page via modular sections and overlays. The CartDrawer and ProductDescriptionModal open as overlays, not separate routes. Filtering products by category filters the featured grid inline. APIs used for all product/category/cart/checkout data. No login; orders are simulated and confirmed instantly.",
+        "data_needs": [
+          "GET /api/products",
+          "GET /api/categories",
+          "GET /api/products/:id",
+          "POST /api/order"
+        ],
+        "is_protected": false
+      }
+    ],
+    "navigation": {
+      "type": "sticky",
+      "position": "top",
+      "style": "Elegant transparent with floating gold effect",
+      "has_logo": true,
+      "has_search": false,
+      "extra_items": [],
+      "links": [
+        {
+          "label": "Home",
+          "route": "/"
+        }
+      ]
+    },
+    "theme": {
+      "design_dna": "Ultra-premium, dark luxury, gold-accented, glassmorphic. Uses Playfair Display (serif) for major headings and brand; Inter for UI and supporting text. All cards, drawers and modals use deep blacks with gold border glows, glass/blurred overlays, and dramatic shadowing. Gold is used sparingly for lines, buttons, and branding. Animations: shimmer, staggered fade/glow, overshoot slide. Generous spacing and oversized visuals. All UI is touch-friendly.",
+      "color_scheme": "Ultra-dark (rich black) with gold accents, white text",
+      "primary_color": "#111112",
+      "secondary_color": "#222225",
+      "accent_color": "#FFD700",
+      "font_family": "Playfair Display, Inter, system-ui, serif",
+      "font_type": "Serif for headers/brand, sans-serif for UI",
+      "border_radius": "16px (cards/modals), 24px (buttons), 48px (drawer top)",
+      "shadow_style": "Layered gold-tinted shadows, deep glass-dark drop-shadows",
+      "animation_style": "Gold shimmer, fade, glassmorphic glow, slide in/out",
+      "interaction_style": "Smooth, tactile, luxury-feel transitions; immediate feedback on interactions (glow, ripple, overlay lock)."
+    },
+    "components": [
+      {
+        "component_name": "Header",
+        "type": "section",
+        "description": "Sticky, dark translucent header bar with logo ('Demelo Jewels' in elegant serif, gold gradient), luxury sans-serif tagline, centrally aligned navigation links as smooth gold-underline hover, cart icon with item count badge (opens CartDrawer on click), full-bleed shadow under bar, 32px vertical padding. Displays only Home as nav link.",
+        "used_on": [
+          "Home"
+        ],
+        "purpose": "Show brand, navigation, cart access on all pages.",
+        "props": []
+      },
+      {
+        "component_name": "HeroSection",
+        "type": "section",
+        "description": "Full-bleed dark hero with subtle animated gold gradient overlay, large 'Demelo Jewels' brand in bolded elegant serif (64px+), tagline 'Elegance in Every Creation' beneath in gold, centered. Hero has fade-in text animation and a subtle shimmer over brand name. Touches viewport top.",
+        "used_on": [
+          "Home"
+        ],
+        "purpose": "Introduce the brand and set the ultra-premium tone.",
+        "props": []
+      },
+      {
+        "component_name": "JewelryCategoriesGrid",
+        "type": "section",
+        "description": "Five-card responsive grid (rings, necklaces, bracelets, earrings, watches), each card square-aspect with luxury item image (dark background, object in sharp gold-lit detail), gold-bordered, light hover scale and gold glow, category name below. Entire card clickable (filters FeaturedCollectionGrid inline to that category, smooth fade transition).",
+        "used_on": [
+          "Home"
+        ],
+        "purpose": "Browse by category and filter featured collection in place.",
+        "props": [
+          "categories",
+          "onSelectCategory",
+          "selectedCategory"
+        ]
+      },
+      {
+        "component_name": "FeaturedCollectionGrid",
+        "type": "section",
+        "description": "Grid (3-column desktop, 1-column mobile) of featured ProductCards; fades in with staggered gold-glow animation. Each card: dark glass surface, product image (centered, 3:2 aspect), product name in gold serif, price in bold, Add to Cart button (pill, elegant, gold with shadow, luxury hover). Clicking card opens ProductDescriptionModal.",
+        "used_on": [
+          "Home"
+        ],
+        "purpose": "Display featured or filtered jewelry products for browsing and purchase.",
+        "props": [
+          "products",
+          "onAddToCart",
+          "onShowProductModal"
+        ]
+      },
+      {
+        "component_name": "ProductDescriptionModal",
+        "type": "modal",
+        "description": "Centered modal with dark glass backdrop, zoom-in gold border animation. Inside: large product image left, product info right (name, category, elegant description, price), Add to Cart \u0026 close buttons (pill gold, interactive ripple). Scrolled background locked, escape key/close button closes modal. Adaptive to screen size.",
+        "used_on": [
+          "Home"
+        ],
+        "purpose": "View jewelry item details and add directly to cart.",
+        "props": [
+          "product",
+          "onAddToCart",
+          "onClose"
+        ]
+      },
+      {
+        "component_name": "CartDrawer",
+        "type": "drawer",
+        "description": "Right-side drawer with smooth slide-in/out, dark semi-transparent glass, gold border left edge. Lists cart items: product thumbnail, name, qty controls, price. Subtotal and Place Order button at bottom (ultra-premium gold pill button). Remove icons are subtle gold. Overlay disables page scroll when open.",
+        "used_on": [
+          "Home"
+        ],
+        "purpose": "Show current cart, adjust quantities, start checkout.",
+        "props": [
+          "cartItems",
+          "onRemoveItem",
+          "onUpdateQty",
+          "onCheckout",
+          "open",
+          "onClose"
+        ]
+      },
+      {
+        "component_name": "CheckoutSection",
+        "type": "section",
+        "description": "Embedded (not modal) section at CartDrawer bottom: animated expand-on-click 'Place Order' button (gold), entry fields slide-down (name, email, address) with strict validation (white text, gold underline). Submits order and displays instant elegant gold confirmation. All input elements in premium minimal style.",
+        "used_on": [
+          "Home"
+        ],
+        "purpose": "Collect customer info and place the (simulated) jewelry order.",
+        "props": [
+          "onPlaceOrder",
+          "processing",
+          "confirmation"
+        ]
+      },
+      {
+        "component_name": "Footer",
+        "type": "section",
+        "description": "Full-width, ultra-dark footer with thin gold top divider, elegant credit ('© 2024 Demelo Jewels'), contact email in sans-serif gold, mini nav (Home), social icon placeholders (gold-on-dark, subtle glow hover). 32px vertical padding, spreads items in center on desktop, stacked on mobile.",
+        "used_on": [
+          "Home"
+        ],
+        "purpose": "Premium brand closure, contact info, and minimal links.",
+        "props": []
+      }
+    ],
+    "layout": {
+      "has_header": true,
+      "has_footer": true,
+      "has_sidebar": false,
+      "max_width": "1400px",
+      "spacing": "Luxury spacious, 48px+ vertical between sections",
+      "footer_links": [
+        {
+          "label": "Home",
+          "route": "/"
+        }
+      ]
+    }
+  },
+  "backend": {
+    "requires_backend": true,
+    "apis": [
+      {
+        "endpoint": "/api/products",
+        "method": "GET",
+        "purpose": "Fetch all jewelry products including category and featured status for display in category grid and featured collection.",
+        "request_body": "N/A",
+        "response": "[{\"id\": number, \"name\": string, \"category\": string, \"price\": number, \"image_url\": string, \"description\": string, \"featured\": bool}]",
+        "auth": false,
+        "used_by": [
+          "FeaturedCollectionGrid",
+          "JewelryCategoriesGrid"
+        ]
+      },
+      {
+        "endpoint": "/api/products/:id",
+        "method": "GET",
+        "purpose": "Fetch a single product by ID, for use in product description modal/detail view.",
+        "request_body": "N/A",
+        "response": "{\"id\": number, \"name\": string, \"category\": string, \"price\": number, \"image_url\": string, \"description\": string, \"featured\": bool}",
+        "auth": false,
+        "used_by": [
+          "ProductDescriptionModal"
+        ]
+      },
+      {
+        "endpoint": "/api/categories",
+        "method": "GET",
+        "purpose": "Retrieve available jewelry categories for display on the Home page category section.",
+        "request_body": "N/A",
+        "response": "[{\"id\": number, \"name\": string, \"image_url\": string}]",
+        "auth": false,
+        "used_by": [
+          "JewelryCategoriesGrid"
+        ]
+      },
+      {
+        "endpoint": "/api/order",
+        "method": "POST",
+        "purpose": "Place a (simulated) jewelry order; returns confirmation with ordered product IDs/quantities and total.",
+        "request_body": "{\"items\": [{\"product_id\": number, \"quantity\": number}], \"customer_name\": string, \"customer_email\": string, \"customer_address\": string}",
+        "response": "{\"order_id\": number, \"status\": string, \"total\": number}",
+        "auth": false,
+        "used_by": [
+          "CheckoutSection"
+        ]
+      }
+    ],
+    "database": {
+      "models": [
+        {
+          "model_name": "Product",
+          "fields": [
+            {
+              "name": "id",
+              "type": "uint (primary key, auto-increment)"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "category",
+              "type": "string"
+            },
+            {
+              "name": "price",
+              "type": "decimal"
+            },
+            {
+              "name": "image_url",
+              "type": "string"
+            },
+            {
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "name": "featured",
+              "type": "bool"
+            }
+          ],
+          "relationships": [],
+          "indexes": [
+            "category",
+            "featured"
+          ]
+        },
+        {
+          "model_name": "Category",
+          "fields": [
+            {
+              "name": "id",
+              "type": "uint (primary key, auto-increment)"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "image_url",
+              "type": "string"
+            }
+          ],
+          "relationships": [],
+          "indexes": [
+            "name"
+          ]
+        },
+        {
+          "model_name": "OrderItem",
+          "fields": [
+            {
+              "name": "id",
+              "type": "uint (primary key, auto-increment)"
+            },
+            {
+              "name": "order_id",
+              "type": "uint (foreign key to Order)"
+            },
+            {
+              "name": "product_id",
+              "type": "uint (foreign key to Product)"
+            },
+            {
+              "name": "quantity",
+              "type": "int"
+            }
+          ],
+          "relationships": [
+            "Order (Many:One)",
+            "Product (Many:One)"
+          ],
+          "indexes": [
+            "order_id"
+          ]
+        },
+        {
+          "model_name": "Order",
+          "fields": [
+            {
+              "name": "id",
+              "type": "uint (primary key, auto-increment)"
+            },
+            {
+              "name": "customer_name",
+              "type": "string"
+            },
+            {
+              "name": "customer_email",
+              "type": "string"
+            },
+            {
+              "name": "customer_address",
+              "type": "string"
+            },
+            {
+              "name": "total",
+              "type": "decimal"
+            },
+            {
+              "name": "status",
+              "type": "string"
+            }
+          ],
+          "relationships": [
+            "OrderItem (One:Many)"
+          ],
+          "indexes": [
+            "customer_email"
+          ]
+        }
+      ]
+    },
+    "authentication": {
+      "required": false,
+      "type": "none",
+      "providers": [],
+      "protected_apis": null
+    },
+    "external_apis": [],
+    "file_storage": {
+      "required": false,
+      "types": [],
+      "max_size": "0MB"
+    }
+  },
+  "technical_specs": {
+    "frontend": {
+      "framework": "React",
+      "routing": "react-router-dom (single route: /)",
+      "styling": "Tailwind CSS v4 with custom gold/dark theme",
+      "state_management": "React Context + useReducer (cart, UI modals)",
+      "animation": "Framer Motion (fade-in, shimmer, slide, glass effects)",
+      "dependencies": [
+        "react",
+        "react-router-dom",
+        "tailwindcss@4",
+        "framer-motion",
+        "clsx"
+      ]
+    },
+    "backend": {
+      "framework": "Go (Gin)",
+      "database": "PostgreSQL",
+      "orm": "GORM",
+      "auth": "N/A",
+      "dependencies": [
+        "gin",
+        "gorm",
+        "pq"
+      ]
+    }
+  }
+}

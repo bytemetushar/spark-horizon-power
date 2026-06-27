@@ -1,0 +1,167 @@
+{
+  "aesthetic": "airbnb-inspired",
+  "layout_archetype": "horizontal-scroll",
+  "design_reference": "airbnb",
+  "fonts": {
+    "display": {
+      "family": "Marcellus",
+      "weights": [
+        400
+      ]
+    },
+    "body": {
+      "family": "Jost",
+      "weights": [
+        400,
+        500
+      ]
+    }
+  },
+  "tokens": {
+    "colors": {
+      "accent": "#FFD700",
+      "primary": "#111112",
+      "scheme": "Ultra-dark (rich black) with gold accents, white text",
+      "secondary": "#222225"
+    },
+    "typography": {
+      "bodyFont": "Jost",
+      "displayFont": "Marcellus",
+      "fontFamily": "Playfair Display, Inter, system-ui, serif",
+      "fontType": "Serif for headers/brand, sans-serif for UI"
+    },
+    "radii": {
+      "default": "16px (cards/modals), 24px (buttons), 48px (drawer top)",
+      "full": "9999px",
+      "lg": "1rem",
+      "sm": "0.25rem"
+    },
+    "shadows": {
+      "default": "Layered gold-tinted shadows, deep glass-dark drop-shadows",
+      "lg": "0 8px 24px rgba(0,0,0,0.2)",
+      "md": "0 4px 12px rgba(0,0,0,0.15)",
+      "sm": "0 1px 3px rgba(0,0,0,0.1)"
+    },
+    "spacing": {
+      "2xl": "6rem",
+      "lg": "2rem",
+      "md": "1rem",
+      "sm": "0.5rem",
+      "xl": "4rem",
+      "xs": "0.25rem"
+    }
+  },
+  "shared_components": [
+    {
+      "name": "Header",
+      "path": "src/components/Header.jsx",
+      "purpose": "Show brand, navigation, cart access on all pages.",
+      "props": []
+    },
+    {
+      "name": "HeroSection",
+      "path": "src/components/HeroSection.jsx",
+      "purpose": "Introduce the brand and set the ultra-premium tone.",
+      "props": []
+    },
+    {
+      "name": "JewelryCategoriesGrid",
+      "path": "src/components/JewelryCategoriesGrid.jsx",
+      "purpose": "Browse by category and filter featured collection in place.",
+      "props": [
+        "categories",
+        "onSelectCategory",
+        "selectedCategory"
+      ]
+    },
+    {
+      "name": "FeaturedCollectionGrid",
+      "path": "src/components/FeaturedCollectionGrid.jsx",
+      "purpose": "Display featured or filtered jewelry products for browsing and purchase.",
+      "props": [
+        "products",
+        "onAddToCart",
+        "onShowProductModal"
+      ]
+    },
+    {
+      "name": "ProductDescriptionModal",
+      "path": "src/components/ProductDescriptionModal.jsx",
+      "purpose": "View jewelry item details and add directly to cart.",
+      "props": [
+        "product",
+        "onAddToCart",
+        "onClose"
+      ]
+    },
+    {
+      "name": "CartDrawer",
+      "path": "src/components/CartDrawer.jsx",
+      "purpose": "Show current cart, adjust quantities, start checkout.",
+      "props": [
+        "cartItems",
+        "onRemoveItem",
+        "onUpdateQty",
+        "onCheckout",
+        "open",
+        "onClose"
+      ]
+    },
+    {
+      "name": "CheckoutSection",
+      "path": "src/components/CheckoutSection.jsx",
+      "purpose": "Collect customer info and place the (simulated) jewelry order.",
+      "props": [
+        "onPlaceOrder",
+        "processing",
+        "confirmation"
+      ]
+    },
+    {
+      "name": "Footer",
+      "path": "src/components/Footer.jsx",
+      "purpose": "Premium brand closure, contact info, and minimal links.",
+      "props": []
+    }
+  ],
+  "pages": [
+    {
+      "name": "Home",
+      "route": "/",
+      "file": "src/pages/Home.jsx",
+      "uses": [
+        "Header",
+        "HeroSection",
+        "JewelryCategoriesGrid",
+        "FeaturedCollectionGrid",
+        "ProductDescriptionModal",
+        "CartDrawer",
+        "CheckoutSection",
+        "Footer"
+      ],
+      "layout_plan": [
+        {
+          "section": "hero",
+          "composition": "Bold left-aligned headline with a teaser of a horizontally-scrolling gallery peeking in beneath."
+        },
+        {
+          "section": "h-scroll",
+          "composition": "A horizontally-scrolling row of cards (products / cases / steps) with scroll-snap, inside the vertical page."
+        },
+        {
+          "section": "detail",
+          "composition": "A 50/50 split feature row expanding on the most important item."
+        },
+        {
+          "section": "stats",
+          "composition": "Stat band with large numerals."
+        },
+        {
+          "section": "cta",
+          "composition": "Full-width CTA band."
+        }
+      ]
+    }
+  ],
+  "notes": "TYPOGRAPHY: display font \"Marcellus\" for headings/hero, body font \"Jost\" for body/labels — load both from Google Fonts via a \u003clink\u003e in index.html and apply with Tailwind arbitrary classes (font-['Marcellus'] / font-['Jost']). Do NOT substitute DM Serif Display or a generic system font.\n\nDesign DNA: Ultra-premium, dark luxury, gold-accented, glassmorphic. Uses Playfair Display (serif) for major headings and brand; Inter for UI and supporting text. All cards, drawers and modals use deep blacks with gold border glows, glass/blurred overlays, and dramatic shadowing. Gold is used sparingly for lines, buttons, and branding. Animations: shimmer, staggered fade/glow, overshoot slide. Generous spacing and oversized visuals. All UI is touch-friendly.. Animation: Gold shimmer, fade, glassmorphic glow, slide in/out. Interaction: Smooth, tactile, luxury-feel transitions; immediate feedback on interactions (glow, ripple, overlay lock).. Color scheme: Ultra-dark (rich black) with gold accents, white text.\n\nLAYOUT ARCHETYPE: horizontal-scroll — build each page from its layout_plan; do NOT collapse into a centered hero followed by a uniform 3-card grid and footer. A card grid, if used, is at most ONE section among differently-composed sections.\n\nREFERENCE DESIGN SYSTEM: airbnb — DISTILL its component treatments (buttons, cards, nav), type scale + tracking, spacing rhythm, and depth/shadow system; match its level of polish. ADAPT the palette to this project's theme — do NOT copy the brand's exact hex values or identity. Avoid generic defaults (raw Tailwind gray text, #3B82F6 blue, system fonts). Brief follows:\n\n---\nversion: alpha\nname: Airbnb-design-analysis\ndescription: A warm, generous consumer marketplace anchored on a clean white canvas and Airbnb Rausch (#ff385c), the single brand voltage that carries every primary CTA, search-button orb, and rating dot. Type runs Airbnb Cereal VF at modest weights — display sits at 22–28px in weight 500/600 rather than the heavy 700+ that fintech and enterprise systems use; the brand trusts photography and generous whitespace over typographic muscle. Three product entries (Homes, Experiences, Services) sit in the top nav with hand-illustrated 32-icon glyphs and \"NEW\" badges, signaling a marketplace expansion rather than a feature dump. Pill-shaped search bars (`{rounded.full}`), softly rounded property cards (`{rounded.lg}` ~14px), and 32px button radii read as friendly and human — there is no hard corner anywhere except the body grid.\n\ncolors:\n  primary: \"#ff385c\"\n  primary-active: \"#e00b41\"\n  primary-disabled: \"#ffd1da\"\n  primary-error-text: \"#c13515\"\n  primary-error-text-hover: \"#b32505\"\n  luxe: \"#460479\"\n  plus: \"#92174d\"\n  ink: \"#222222\"\n  body: \"#3f3f3f\"\n  muted: \"#6a6a6a\"\n  muted-soft: \"#929292\"\n  hairline: \"#dddddd\"\n  hairline-soft: \"#ebebeb\"\n  border-strong: \"#c1c1c1\"\n  canvas: \"#ffffff\"\n  surface-soft: \"#f7f7f7\"\n  surface-card: \"#ffffff\"\n  surface-strong: \"#f2f2f2\"\n  on-primary: \"#ffffff\"\n  on-dark: \"#ffffff\"\n  legal-link: \"#428bff\"\n  star-rating: \"#222222\"\n  scrim: \"#000000\"\n\ntypography:\n  display-xl:\n    fontFamily: \"'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif\"\n    fontSize: 28px\n    fontWeight: 700\n    lineHeight: 1.43\n    letterSpacing: 0\n  display-lg:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 22px\n    fontWeight: 500\n    lineHeight: 1.18\n    letterSpacing: -0.44px\n  display-md:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 21px\n    fontWeight: 700\n    lineHeight: 1.43\n    letterSpacing: 0\n  display-sm:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 20px\n    fontWeight: 600\n    lineHeight: 1.20\n    letterSpacing: -0.18px\n  title-md:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 16px\n    fontWeight: 600\n    lineHeight: 1.25\n    letterSpacing: 0\n  title-sm:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 16px\n    fontWeight: 500\n    lineHeight: 1.25\n    letterSpacing: 0\n  rating-display:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 64px\n    fontWeight: 700\n    lineHeight: 1.1\n    letterSpacing: -1px\n  body-md:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 16px\n    fontWeight: 400\n    lineHeight: 1.5\n    letterSpacing: 0\n  body-sm:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 14px\n    fontWeight: 400\n    lineHeight: 1.43\n    letterSpacing: 0\n  caption:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 14px\n    fontWeight: 500\n    lineHeight: 1.29\n    letterSpacing: 0\n  caption-sm:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 13px\n    fontWeight: 400\n    lineHeight: 1.23\n    letterSpacing: 0\n  badge:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 11px\n    fontWeight: 600\n    lineHeight: 1.18\n    letterSpacing: 0\n  micro-label:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 12px\n    fontWeight: 700\n    lineHeight: 1.33\n    letterSpacing: 0\n  uppercase-tag:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 8px\n    fontWeight: 700\n    lineHeight: 1.25\n    letterSpacing: 0.32px\n    textTransform: uppercase\n  button-md:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 16px\n    fontWeight: 500\n    lineHeight: 1.25\n    letterSpacing: 0\n  button-sm:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 14px\n    fontWeight: 500\n    lineHeight: 1.29\n    letterSpacing: 0\n  link:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 14px\n    fontWeight: 400\n    lineHeight: 1.43\n    letterSpacing: 0\n  nav-link:\n    fontFamily: \"'Airbnb Cereal VF', Circular, sans-serif\"\n    fontSize: 16px\n    fontWeight: 600\n    lineHeight: 1.25\n    letterSpacing: 0\n\nrounded:\n  none: 0px\n  xs: 4px\n  sm: 8px\n  md: 14px\n  lg: 20px\n  xl: 32px\n  full: 9999px\n\nspacing:\n  xxs: 2px\n  xs: 4px\n  sm: 8px\n  md: 12px\n  base: 16px\n  lg: 24px\n  xl: 32px\n  xxl: 48px\n  section: 64px\n\ncomponents:\n  button-primary:\n    backgroundColor: \"{colors.primary}\"\n    textColor: \"{colors.on-primary}\"\n    typography: \"{typography.button-md}\"\n    rounded: \"{rounded.sm}\"\n    padding: 14px 24px\n    height: 48px\n  button-primary-active:\n    backgroundColor: \"{colors.primary-active}\"\n    textColor: \"{colors.on-primary}\"\n    rounded: \"{rounded.sm}\"\n  button-primary-disabled:\n    backgroundColor: \"{colors.primary-disabled}\"\n    textColor: \"{colors.on-primary}\"\n    rounded: \"{rounded.sm}\"\n  button-secondary:\n    backgroundColor: \"{colors.canvas}\"\n    textColor: \"{colors.ink}\"\n    typography: \"{typography.button-md}\"\n    rounded: \"{rounded.sm}\"\n    padding: 13px 23px\n    height: 48px\n  button-tertiary-text:\n    backgroundColor: transparent\n    textColor: \"{colors.ink}\"\n    typography: \"{typography.button-md}\"\n  button-pill-rausch:\n    backgroundColor: \"{colors.primary}\"\n    textColor: \"{colors.on-primary}\"\n    typography: \"{typography.button-sm}\"\n    rounded: \"{rounded.full}\"\n    padding: 10px 20px\n  search-orb:\n    backgroundColor: \"{colors.primary}\"\n    textColor: \"{colors.on-primary}\"\n    rounded: \"{rounded.full}\"\n    height: 48px\n  icon-button-circle:\n    backgroundColor: \"{colors.surface-strong}\"\n    textColor: \"{colors.ink}\"\n    rounded: \"{rounded.full}\"\n    height: 32px\n  icon-button-outline:\n    backgroundColor: \"{colors.canvas}\"\n    textColor: \"{colors.ink}\"\n    rounded: \"{rounded.full}\"\n    height: 40px\n  top-nav:\n    backgroundColor: \"{colors.canvas}\"\n    textColor: \"{colors.ink}\"\n    typography: \"{typography.nav-link}\"\n    height: 80px\n  product-tab-active:\n    backgroundColor: transparent\n    textColor: \"{colors.ink}\"\n    typography: \"{typography.nav-link}\"\n    rounded: \"{rounded.none}\"\n  product-tab-inactive:\n    backgroundColor: transparent\n    textColor: \"{colors.muted}\"\n    typography: \"{typography.nav-link}\"\n  search-bar-pill:\n    backgroundColor: \"{colors.canvas}\"\n    textColor: \"{colors.ink}\"\n    typography: \"{typography.body-sm}\"\n    rounded: \"{rounded.full}\"\n    padding: 14px 24px\n    height: 64px\n  search-field-segment:\n    backgroundColor: transparent\n    textColor: \"{colors.ink}\"\n    typography: \"{typography.caption}\"\n    padding: 8px 24px\n  category-strip:\n    backgroundColor: \"{colors.canvas}\"\n    textColor: \"{colors.muted}\"\n    typography: \"{typography.button-sm}\"\n  category-tab-active:\n    backgroundColor: transparent\n    textColor: \"{colors.ink}\"\n    typography: \"{typography.button-sm}\"\n    rounded: \"{rounded.n\n…(brief truncated)\n"
+}
